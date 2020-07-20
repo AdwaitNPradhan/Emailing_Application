@@ -1,6 +1,9 @@
 #GUI and LINKING
 import backend,sys
 import PySimpleGUI as sg
+import elevate
+
+elevate.elevate() # promoting the premision levels 
 
 FONT = "comic"
 THEME = 'DarkBlack'
