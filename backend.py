@@ -15,17 +15,19 @@ def StartSending(values: dict):
     # print(f"viewing organized data.\nSenderA: {sndrMail} SenderP: {sndrPass} RecieverA: {rcvrMail} message: {msg}")        #uncomment to debug for further development
     
     context = ssl.create_default_context()
-    
-    with smtplib.SMTP_SSL("smtp.gmail.com",PORT,context = context) as server:               #constructing the connection to the SMTP server
-        
-        try:
-            server.login(sndrMail,sndrPass)                     #Starting the Connection and logging in 
-            result = server.sendmail(sndrMail,rcvrMail,msg)     #send the mail
-            # print("backend try block: ",result)
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com",PORT,context = context) as server:               #constructing the connection to the SMTP server
             
-        except Exception as e:
-            # print("backend except block error : ",values)                 #uncomment to debug for further development
-            return e
-        
-        finally:
-            server.quit()
+            try:
+                server.login(sndrMail,sndrPass)                     #Starting the Connection and logging in 
+                result = server.sendmail(sndrMail,rcvrMail,msg)     #send the mail
+                # print("backend try block: ",result)
+                
+            except Exception as e:
+                # print("backend except block error : ",values)                 #uncomment to debug for further development
+                return e
+            
+            finally:
+                server.quit()
+    except Exception as e:
+        return e
